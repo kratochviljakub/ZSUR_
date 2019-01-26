@@ -8,7 +8,7 @@ toc
 
 %% b)
 tic
-tridy(2) = retezove_mapy(data, 80);
+tridy(2) = retezove_mapy(data, 6);
 toc
 
 %% c)

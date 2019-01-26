@@ -49,7 +49,6 @@ hladiny(end) = hladiny(end - 1);
 
 %%
 tridy = 0;
-prumer = 0;
 soucet = 0;
 rozptyl = max(hladiny) - min(hladiny);
 for i = 1:data_size(1)
@@ -67,7 +66,7 @@ output_args = tridy;
 figure
 plot(hladiny((data_size(1) - (tridy*4)):end));
 title('Metoda shlukové hladiny - vykreslení podmnožiny nejvyšších hodnot h')
-ylabel('velikost h')
+ylabel('Velikost h')
 
 %%
 % tridy = 0;

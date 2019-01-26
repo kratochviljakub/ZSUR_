@@ -1,7 +1,7 @@
 % urèení poètu tøíd metodou retezove mapy
-function [ output_args ] = retezove_mapy( data, prah )
+function [ output_args ] = retezove_mapy( data, t )
 % data = mnozina obrazu
-%prah = prahová hodnota vzdálenosti
+% t = konstanta ovlivòující prahovou hodnotu rozdìlení tøíd
 % vrací [ poèet tøíd ]
 
 data_size = size(data);
@@ -42,8 +42,19 @@ end
 %% test data
 % data = [2 -3; 3 3; 2 2; -3 1; -1 0; -3 -2; 1 -2; 3 2];
 
-%%
-%plot(mapa(:,1),mapa(:,2))
+%% vykreslení
+figure
+plot(mapa(:,1),mapa(:,2))
+title('Metoda øetìzové mapy - mapa s body')
+
+figure
+plot(mapa(:,3))
+title('Metoda øetìzové mapy - prùbìh tvorby vzdálenostní mapy')
+xlabel('Index vzdálenosti')
+ylabel('Vzdálenost mezi nejbližšími body')
+
+%% urèení poètu tøíd
+prah = max(mapa(:,3)) / t;
 
 tridy = 1;
 for i = 1:data_size(1)
