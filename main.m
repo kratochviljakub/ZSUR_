@@ -2,30 +2,23 @@ inicializace
 
 %% 1
 %a)
-tic
 tridy(1) = shlukove_hladiny(data);
-toc
-
-%% b)
-tic
-tridy(2) = retezove_mapy(data, 6);
-toc
-
-%% c)
-tic
+% b)
+tridy(2) = retezove_mapy(data, 5);
+% c)
 tridy(3) = maximin(data, 0.3);
-toc  
-            
+
+pocet_trid = (tridy(1) + tridy(2) + tridy(3)) / 3;
+pocet_trid = round(pocet_trid);   
+
 %% 2
 tic
-[tridy_data, stredy] = k_means(data, tridy(1));
+[tridy_data, stredy] = k_means(data, pocet_trid);
 toc
 
-% PÍÍÍÍÍÈI VOLE - nìco tam nefunguje a já nevim co. Dìlí to na kundu a
-% musím pøijít na to proè. Seru se s tím takovou dobu a za 5 hodin vstávám
-% do fachu. Mrdat.
 %%
 figure
+colors = [0 0 1; 0 0.5 0; 1 0 0; 0 0.75 0.75; 0.75 0 0.75; 0.75 0.75 0; 0 0 0];
 % vykreslení bodù
 for i = 1:size(data)    
     scatter(tridy_data(i,1), tridy_data(i,2),[], colors(tridy_data(i,3),:))

@@ -16,7 +16,7 @@ for i = 1:data_size(1)
     matice(i) = sum((data(startovni_bod,:) - data(i,:)).^2); %vzdálenost mi(1) a ostatních bodù
 end
 [~,I] = max(matice); % [hodnota, pozice]
-mi(2,:) = data(I,:);
+mi(2,:) = data(I,:); % nejvzdálenìjší bod od mi(1)
 data(startovni_bod,:) = 0;
 data(I,:) = 0;
 
@@ -53,7 +53,6 @@ end
 % data = [2 -3; 3 3; 2 2; -3 1; -1 0; -3 -2; 1 -2; 3 2];
 
 %%
-
 output_args = size(mi,1);
 end
 

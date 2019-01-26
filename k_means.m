@@ -1,7 +1,7 @@
 % Rozdìlení dat metodou k-means do urèeného poètu tøíd
 function [ output_args1, output_args2 ] = k_means( data, R )
 % data = mnozina obrazu
-% q = poèet tøíd
+% R = poèet tøíd
 % vrací [ data s informací o rozdìlení do tøíd ], [ støedy tøíd ]
 
 data_size = size(data);
