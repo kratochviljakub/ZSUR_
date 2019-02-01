@@ -1,8 +1,8 @@
 % Rozdìlení dat metodou k-means do urèeného poètu tøíd
-function [ output_args1, output_args2 ] = k_means( data, R )
+function [ tridy, mi, zkresleni ] = k_means( data, R )
 % data = mnozina obrazu
 % R = poèet tøíd
-% vrací [ data s informací o rozdìlení do tøíd ], [ støedy tøíd ]
+% vrací [data ve tøídách, støedy, kriteriální funkce J]
 
 data_size = size(data);
 tridy = data;
@@ -21,7 +21,7 @@ while true
         break;
     end
 end
-tmp = [1 2 3 4];
+%tmp = [1 2 3 4];
 for i = 1:R
     mi(i,:) = data(tmp(i),:);
 end
@@ -38,9 +38,11 @@ while true
     end
     
     % rozdìlení dat do tøíd
+    zkresleni = zeros(R,1);
     for i = 1:data_size(1)
-        [~,I] = min(matice(:,i));
+        [M,I] = min(matice(:,i));
         tridy(i,3) = I;
+        zkresleni(I) = zkresleni(I) + M;
     end
     
     % pøepoètení støedù shlukù
@@ -60,12 +62,12 @@ while true
         mi_new(i,:) = suma;
     end
     
-    if mi_new == mi
+    if mi_new == mi % kontrola ukonèovací podmínky
         break;
     else
         mi = mi_new;
         if c > 5000
-            disp('Nìco se pokazilo v k-means');
+            disp('Nìco se pokazilo v k-means, metoda vèas nedokonvergovala');
             break;
         end
     end
@@ -76,9 +78,20 @@ end
 %% test data
 % data = [0 1; 2 1; 1 3; 1 -1; 1 5; 1 9; -1 7; 3 7];
 
-%%
+%% vykreslení
+figure
+colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
+% vykreslení bodù
+for i = 1:data_size(1)   
+    scatter(tridy(i,1), tridy(i,2),[], colors(tridy(i,3),:),'x')
+    hold on
+end
 
-output_args1 = tridy;
-output_args2 = mi;
+% vykreslení støedù
+for i = 1:size(mi)
+    scatter(mi(i,1), mi(i,2),[], colors(7,:),'filled')
+end
+output = 1;
+title('Metoda k-means - rozdìlení dat do shlukù')
 end
 

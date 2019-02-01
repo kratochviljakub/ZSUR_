@@ -45,7 +45,7 @@ end
 %% vykreslení
 figure
 plot(mapa(:,1),mapa(:,2))
-title('Metoda øetìzové mapy - mapa s body')
+title('Metoda øetìzové mapy - mapa')
 
 figure
 plot(mapa(:,3))
