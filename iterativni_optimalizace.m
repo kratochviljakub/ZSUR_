@@ -1,4 +1,4 @@
-% Rozdìlení dat metodou k-means do urèeného poètu tøíd
+% Iterativní optimalizace rozdìlení dat 
 function [ ] = iterativni_optimalizace( tridy, stredy, zkresleni )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù

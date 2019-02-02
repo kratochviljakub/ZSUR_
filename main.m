@@ -14,6 +14,9 @@ pocet_trid = round(pocet_trid);
 %% 2
 [tridy, stredy, J] = k_means(data, pocet_trid);
 nerovnomerne_binarni_deleni(data, pocet_trid);
-iterativni_optimalizace(tridy, stredy, J);    
+iterativni_optimalizace(tridy, stredy, J);   
+
+%%
+bayes(tridy, stredy);
 %%
 scatter(data(:,1), data(:,2),'x')
