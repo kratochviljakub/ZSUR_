@@ -22,9 +22,13 @@ while true
     end
 end
 %tmp = [1 2 3 4];
+figure
+hold on
 for i = 1:R
     mi(i,:) = data(tmp(i),:);
+    scatter(mi(i,1), mi(i,2))
 end
+
    
 
 % algoritmus
@@ -91,7 +95,6 @@ end
 for i = 1:size(mi)
     scatter(mi(i,1), mi(i,2),[], colors(7,:),'filled')
 end
-output = 1;
 title('Metoda k-means - rozdìlení dat do shlukù')
 end
 

@@ -1,23 +1,23 @@
 % Iterativní optimalizace rozdìlení dat 
-function [ ] = iterativni_optimalizace( tridy, stredy, zkresleni )
+function [ ] = iterativni_optimalizace( tridy2, stredy, zkresleni )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
 % zkresleni = kriteriální funkce J
 
-data_size = size(tridy);
+data_size = size(tridy2);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
 velikost_shluku = zeros(1, pocet_shluku); % poèet bodù v jednotlivıch shlucích
 
 % zjištìní poètu bodù ve shlucích
 for i = 1:data_size(1)
-    velikost_shluku(tridy(i,3)) = velikost_shluku(tridy(i,3)) + 1;
+    velikost_shluku(tridy2(i,3)) = velikost_shluku(tridy2(i,3)) + 1;
 end
 
 
 while true
    zkresleni_new = zkresleni;
    for i = 1:data_size(1)
-       a = tridy(i,3); % do kolikátého shluku patøí bod x
+       a = tridy2(i,3); % do kolikátého shluku patøí bod x
       if  velikost_shluku(a) == 1
           break
       else
@@ -25,7 +25,7 @@ while true
           matice = zeros(1,pocet_shluku);
          
           for j = 1:pocet_shluku
-              matice(j) = sum(((stredy(j,1) - tridy(i,1))^2 + (stredy(j,2) - tridy(i,2))^2));
+              matice(j) = sum(((stredy(j,1) - tridy2(i,1))^2 + (stredy(j,2) - tridy2(i,2))^2));
           end
           
           % vıpoèet A_i, A_j
@@ -43,13 +43,13 @@ while true
           A(A == A(a)) = 2*max(A); % "odstranìní" prvku A_i z pole
           [~,I] = min(A);
           if tmp > A(I)
-              tridy(i,3) = I;
+              tridy2(i,3) = I;
               zkresleni_new(I) =  zkresleni_new(I) + ((velikost_shluku(I)/(velikost_shluku(I) + 1)) * matice(I));
               zkresleni_new(a) =  zkresleni_new(a) - ((velikost_shluku(a)/(velikost_shluku(a) - 1)) * matice(a));
-              stredy(I,1) = stredy(I,1) + (tridy(a,1) - stredy(I,1)) / (velikost_shluku(I) + 1);
-              stredy(I,2) = stredy(I,2) + (tridy(a,2) - stredy(I,2)) / (velikost_shluku(I) + 1);
-              stredy(a,1) = stredy(a,1) - (tridy(a,1) - stredy(a,1)) / (velikost_shluku(a) - 1);
-              stredy(a,2) = stredy(a,2) - (tridy(a,2) - stredy(a,2)) / (velikost_shluku(a) - 1);
+              stredy(I,1) = stredy(I,1) + (tridy2(a,1) - stredy(I,1)) / (velikost_shluku(I) + 1);
+              stredy(I,2) = stredy(I,2) + (tridy2(a,2) - stredy(I,2)) / (velikost_shluku(I) + 1);
+              stredy(a,1) = stredy(a,1) - (tridy2(a,1) - stredy(a,1)) / (velikost_shluku(a) - 1);
+              stredy(a,2) = stredy(a,2) - (tridy2(a,2) - stredy(a,2)) / (velikost_shluku(a) - 1);
               velikost_shluku(I) = velikost_shluku(I) + 1;
               velikost_shluku(a) = velikost_shluku(a) - 1;
           end
@@ -68,7 +68,7 @@ figure
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
 % vykreslení bodù
 for i = 1:data_size(1)   
-    scatter(tridy(i,1), tridy(i,2),[], colors(tridy(i,3),:),'x')
+    scatter(tridy2(i,1), tridy2(i,2),[], colors(tridy2(i,3),:),'x')
     hold on
 end
 

@@ -23,5 +23,11 @@ iterativni_optimalizace(tridy, stredy, J);
 bayes(tridy, stredy);
 % b)
 minimalni_vzdalenost(tridy, stredy);
+% c)
+nejblizsi_soused(tridy, stredy);
+% d)
+rosenblattuv_algoritmus(tridy, stredy);
+%%
+
 %%
 scatter(data(:,1), data(:,2),'x')

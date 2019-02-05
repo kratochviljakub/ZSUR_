@@ -1,16 +1,16 @@
 % Rozdìlení bodù pomocí Bayesova klasifikátoru
-function [ ] = bayes( tridy, stredy )
+function [ ] = bayes( tridy2, stredy )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
 
 
-data_size = size(tridy);
+data_size = size(tridy2);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
 velikost_shluku = zeros(1, pocet_shluku); % poèet bodù v jednotlivých shlucích
 
 % zjištìní poètu bodù ve shlucích
 for i = 1:data_size(1)
-    velikost_shluku(tridy(i,3)) = velikost_shluku(tridy(i,3)) + 1;
+    velikost_shluku(tridy2(i,3)) = velikost_shluku(tridy2(i,3)) + 1;
 end
 
 % % vypoètení apriorních pravdìpodobností shlukù
@@ -23,9 +23,9 @@ end
 mi = zeros(pocet_shluku,2);
 for i = 1:pocet_shluku
     for j = 1:data_size(1)
-        if tridy(j,3) == i
-            mi(i,1) = mi(i,1) + tridy(j,1);
-            mi(i,2) = mi(i,2) + tridy(j,2);
+        if tridy2(j,3) == i
+            mi(i,1) = mi(i,1) + tridy2(j,1);
+            mi(i,2) = mi(i,2) + tridy2(j,2);
         end
     end
     mi(i,:) = mi(i,:) / velikost_shluku(i);
@@ -37,9 +37,9 @@ sigma(:) = {zeros(size(stredy,2))};
 for i = 1:pocet_shluku
     tmp_sigma = zeros(size(stredy,2));
     for j = 1:data_size(1)
-        if tridy(j,3) == i
-            tmp(1) = tridy(j,1) - mi(i,1);
-            tmp(2) = tridy(j,2) - mi(i,2);
+        if tridy2(j,3) == i
+            tmp(1) = tridy2(j,1) - mi(i,1);
+            tmp(2) = tridy2(j,2) - mi(i,2);
             tmp_sigma = tmp_sigma + (tmp' * tmp);
         end
     end
@@ -49,8 +49,8 @@ end
 
 % møížka bodù pro výpoèet Gaussova (normálního) rozdìlení
 rastr = 0.5;
-x = (min(tridy(:,1))-0.1):rastr:(max(tridy(:,1))+0.1);
-y = (min(tridy(:,2))-0.1):rastr:(max(tridy(:,2))+0.1);
+x = (min(tridy2(:,1))-0.1):rastr:(max(tridy2(:,1))+0.1);
+y = (min(tridy2(:,2))-0.1):rastr:(max(tridy2(:,2))+0.1);
 [X,Y] = meshgrid(x,y);
 
 % výpoèet Gaussovo rozdìlení
@@ -91,7 +91,7 @@ end
 
 % vykreslení bodù
 for i = 1:data_size(1)   
-    scatter(tridy(i,1), tridy(i,2),[], colors(tridy(i,3),:),'x')
+    scatter(tridy2(i,1), tridy2(i,2),[], colors(tridy2(i,3),:),'x')
     hold on
 end
 
