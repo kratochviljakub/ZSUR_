@@ -19,6 +19,9 @@ nerovnomerne_binarni_deleni(data, pocet_trid);
 iterativni_optimalizace(tridy, stredy, J);   
 
 %% 4
+% a)
 bayes(tridy, stredy);
+% b)
+minimalni_vzdalenost(tridy, stredy);
 %%
 scatter(data(:,1), data(:,2),'x')

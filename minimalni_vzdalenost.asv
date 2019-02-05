@@ -1,8 +1,7 @@
-% Rozdìlení bodù pomocí Bayesova klasifikátoru
-function [ ] = bayes( tridy, stredy )
+% Rozdìlení bodù pomocí klasifikátoru s minimální vzdáleností
+function [ ] = minimalni_vzdalenost( tridy, stredy )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
-
 
 data_size = size(tridy);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
@@ -12,12 +11,6 @@ velikost_shluku = zeros(1, pocet_shluku); % poèet bodù v jednotlivých shlucích
 for i = 1:data_size(1)
     velikost_shluku(tridy(i,3)) = velikost_shluku(tridy(i,3)) + 1;
 end
-
-% % vypoètení apriorních pravdìpodobností shlukù
-% P_omega = zeros(1,pocet_shluku);
-% for i = 1:pocet_shluku
-%     P_omega(i) = velikost_shluku(i) / data_size(1);
-% end
 
 % výpoèet støedních hodnot Gaussovského (normálního) rozdìlení
 mi = zeros(pocet_shluku,2);
@@ -31,39 +24,20 @@ for i = 1:pocet_shluku
     mi(i,:) = mi(i,:) / velikost_shluku(i);
 end
 
-% výpoèet kovarianèní matice Gaussovského (normálního) rozdìlení
-sigma = cell(1,pocet_shluku);
-sigma(:) = {zeros(size(stredy,2))};
-for i = 1:pocet_shluku
-    tmp_sigma = zeros(size(stredy,2));
-    for j = 1:data_size(1)
-        if tridy(j,3) == i
-            tmp(1) = tridy(j,1) - mi(i,1);
-            tmp(2) = tridy(j,2) - mi(i,2);
-            tmp_sigma = tmp_sigma + (tmp' * tmp);
-        end
-    end
-    tmp_sigma = tmp_sigma / velikost_shluku(i);
-    sigma{i} = tmp_sigma;
-end
-
-% møížka bodù pro výpoèet Gaussova (normálního) rozdìlení
+% møížka bodù
 rastr = 0.5;
 x = (min(tridy(:,1))-0.1):rastr:(max(tridy(:,1))+0.1);
 y = (min(tridy(:,2))-0.1):rastr:(max(tridy(:,2))+0.1);
-[X,Y] = meshgrid(x,y);
 
-% výpoèet Gaussovo rozdìlení
-for i = 1:pocet_shluku
-    tmp_gauss = mvnpdf([X(:) Y(:)],mi(i,:),sigma{i});
-    tmp_gauss = reshape(tmp_gauss,length(y),length(x));
-    gauss{i} = tmp_gauss;
-end
-
-
-
-%% vykreslení
+% výpoèet diskriminaèní funkce, zaøazení bodu a vykreslení møížky
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
+for i = x
+    for j = y
+        g = zeros(1,pocet_shluku);
+        for k = 1:pocet_shluku
+            g(k) = (i - )
+
+
 
 % vykreslení pravdìpodobnostní møížky
 figure
