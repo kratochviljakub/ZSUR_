@@ -63,7 +63,7 @@ end
 output_args = tridy;
 
 %% vykreslení
-figure
+figure('Name','1a_shluk_hladiny');
 plot(hladiny((data_size(1) - (tridy*4)):end));
 title('Metoda shlukové hladiny - vykreslení podmnožiny nejvyšších hodnot h')
 ylabel('Velikost h')

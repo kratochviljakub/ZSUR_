@@ -83,7 +83,7 @@ end
 % data = [0 1; 2 1; 1 3; 1 -1; 1 5; 1 9; -1 7; 3 7];
 
 %% vykreslení
-figure
+figure('Name','2_k-means');
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
 % vykreslení bodù
 for i = 1:data_size(1)   
@@ -96,5 +96,7 @@ for i = 1:size(mi)
     scatter(mi(i,1), mi(i,2),[], colors(7,:),'filled')
 end
 title('Metoda k-means - rozdìlení dat do shlukù')
+xlabel('x_1')
+ylabel('x_2')
 end
 

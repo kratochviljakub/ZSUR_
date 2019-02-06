@@ -55,7 +55,7 @@ end
 
 
 %% vykreslení
-figure
+figure('Name','2_nerovnomerne_bin_del');
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
 % Remove zero columns
 tridy2( :, all(~tridy2,1) ) = [];
@@ -79,5 +79,7 @@ for i = 1:d(2)
     scatter(stredy(1,i), stredy(2,i),[], colors(7,:),'filled')
 end
 title('Nerovnomìrné binární dìlení - rozdìlení dat do shlukù')
+xlabel('x_1')
+ylabel('x_2')
 end
 

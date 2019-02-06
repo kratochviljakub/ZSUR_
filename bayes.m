@@ -66,7 +66,7 @@ end
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
 
 % vykreslení pravdìpodobnostní møížky
-figure
+figure('Name','4a_bayes');
 y_in_gauss = 1;
 for i = x
     x_in_gauss = 1;
@@ -100,9 +100,11 @@ for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
 title('Bayesùv klasifikátor')
+xlabel('x_1')
+ylabel('x_2')
 
 % vykreslení 3D grafu normálních rozdìlení
-figure
+figure('Name','4a_bayes_gauss');
 for i = 1:pocet_shluku
     surf(x,y,gauss{i})
     hold on

@@ -43,11 +43,13 @@ end
 % data = [2 -3; 3 3; 2 2; -3 1; -1 0; -3 -2; 1 -2; 3 2];
 
 %% vykreslení
-figure
+figure('Name','1b_retez_mapa');
 plot(mapa(:,1),mapa(:,2))
 title('Metoda øetìzové mapy - mapa')
+xlabel('x_1')
+ylabel('x_2')
 
-figure
+figure('Name','1b_retez_mapa_vzdalenosti');
 plot(mapa(:,3))
 title('Metoda øetìzové mapy - prùbìh tvorby vzdálenostní mapy')
 xlabel('Index vzdálenosti')

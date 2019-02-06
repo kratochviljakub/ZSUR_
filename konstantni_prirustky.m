@@ -1,10 +1,12 @@
-% Rozdìlení prostoru pomocí Rosenblattova algoritmu
-function [ ] = rosenblattuv_algoritmus( tridy, stredy )
+% Rozdìlení prostoru pomocí metody konstantních pøírùstkù
+function [ ] = konstantni_prirustky( tridy, stredy )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
 
 data_size = size(tridy);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
+beta = 1; % konstanta uèení
+delta = 0; % pásmo necitlivosti
 
 % inicializace pøímek náhodnými hodnotami
 q = cell(1,pocet_shluku);
@@ -26,10 +28,11 @@ for i = 1:pocet_shluku
                 omega = -1;
             end
             
-            tmp = q{i}' * x * omega;
+            c_k = beta / sum(x.^2);
+            tmp = q{i}' * x * omega; % malé omega
             
-            if tmp < 0
-                q{i} = q{i} + (x * omega);
+            if tmp < delta
+                q{i} = q{i} + c_k * (x * omega);
                 error = error + 1;
             end
         end
@@ -53,7 +56,7 @@ y = (min(tridy(:,2))-0.1):rastr:(max(tridy(:,2))+0.1);
 
 % vykreslení
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figure('Name','4d_rosenblatt');
+figure('Name','4d_konst_prirustky');
 hold on
 for i = x
     for j = y
@@ -94,11 +97,11 @@ end
 for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
-title('Rosenblattùv algoritmus')
+title('Metoda konstantních pøírùstkù')
 xlabel('x_1')
 ylabel('x_2')
 
-txt = strcat('Poèet iterací: ', num2str(iterace));
+txt = strcat('Poèet iterací: ', num2str(iterace), ', \beta: ', num2str(beta), ' \delta: ', num2str(delta));
 text(lim_x(1), lim_y(1)+2, txt)
 end
 

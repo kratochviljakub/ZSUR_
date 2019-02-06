@@ -64,7 +64,7 @@ end
 
 
 %% vykreslení
-figure
+figure('Name','3_iterativni_optimalizace');
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
 % vykreslení bodù
 for i = 1:data_size(1)   
@@ -78,5 +78,7 @@ for i = 1:size(stredy)
 end
 
 title('Aplikování iterativní optimalizace na k-means')
+xlabel('x_1')
+ylabel('x_2')
 end
 

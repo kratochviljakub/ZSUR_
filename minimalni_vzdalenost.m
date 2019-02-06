@@ -31,7 +31,7 @@ y = (min(tridy2(:,2))-0.1):rastr:(max(tridy2(:,2))+0.1);
 
 % výpoèet diskriminaèní funkce, zaøazení bodu a vykreslení møížky
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figure
+figure('Name','4b_min_vzdalenost');
 hold on
 for i = x
     for j = y
@@ -54,6 +54,8 @@ for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
 title('Klasifikátor podle minimální vzdálenosti')
+xlabel('x_1')
+ylabel('x_2')
 
 end
 

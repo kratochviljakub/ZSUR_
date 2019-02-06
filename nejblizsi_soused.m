@@ -34,7 +34,7 @@ y = (min(tridy(:,2))-0.1):rastr:(max(tridy(:,2))+0.1);
 %% nejbližší soused
 % výpoèet diskriminaèní funkce, zaøazení bodu a vykreslení møížky
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figure
+figure('Name','4c_nejblizsi_soused');
 hold on
 for i = x
     for j = y
@@ -59,6 +59,8 @@ for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
 title('Klasifikátor podle nejbližšího souseda')
+xlabel('x_1')
+ylabel('x_2')
 
 
 %% k nejbližších sousedù
@@ -66,8 +68,7 @@ k_sousedu = 2;
 
 % výpoèet diskriminaèní funkce, zaøazení bodu a vykreslení møížky
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figure
-hold on
+figurefigure('Name','4c_k_nejblizsich_sousedu');hold on
 for i = x
     for j = y
         g = zeros(pocet_shluku, pocet_etalonu);
@@ -99,6 +100,8 @@ for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
 title('Klasifikátor podle k-nejbližších sousedù')
+xlabel('x_1')
+ylabel('x_2')
 
 
 end
