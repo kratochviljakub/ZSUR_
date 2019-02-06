@@ -1,12 +1,12 @@
 % Rozdìlení prostoru pomocí metody upravených konstantních pøírùstkù
-function [ ] = upravene_konstantni_prirustky( tridy, stredy )
+function [ ] = upravene_konstantni_prirustky( tridy, stredy, delta, beta )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
+% delta = pásmo necitlivosti
+% beta = konstanta uèení
 
 data_size = size(tridy);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
-beta = 1; % konstanta uèení
-delta = 0; % pásmo necitlivosti
 
 % inicializace pøímek náhodnými hodnotami
 q = cell(1,pocet_shluku);
@@ -57,7 +57,8 @@ y = (min(tridy(:,2))-0.1):rastr:(max(tridy(:,2))+0.1);
 
 % vykreslení
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figure('Name','4d_uprav_konst_prirustky');
+name = strcat('4d_uprav_konst_prirustky_', num2str(beta));
+figure('Name',name);
 hold on
 for i = x
     for j = y

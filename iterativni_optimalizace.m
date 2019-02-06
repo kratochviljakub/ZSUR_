@@ -77,7 +77,7 @@ for i = 1:size(stredy)
     scatter(stredy(i,1), stredy(i,2),[], colors(7,:),'filled')
 end
 
-title('Aplikování iterativní optimalizace na k-means')
+title('Iterativní optimalizace')
 xlabel('x_1')
 ylabel('x_2')
 end

@@ -2,6 +2,7 @@
 function [ ] = rosenblattuv_algoritmus( tridy, stredy )
 % tridy = rozdìlení bodù do shlukù
 % stredy = støedy shlukù
+% delta = pásmo necitlivosti
 
 data_size = size(tridy);
 [pocet_shluku,~] = size(stredy); % poèet shlukù

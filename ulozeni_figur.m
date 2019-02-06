@@ -8,3 +8,5 @@ for iFig = 1:length(FigList)
   set(0, 'CurrentFigure', FigHandle);
   saveas(FigHandle, fullfile(FolderName, [FigName, '.eps']), 'epsc');
 end
+
+clear FolderName FigList FigHandle FigName iFig

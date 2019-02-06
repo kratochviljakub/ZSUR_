@@ -68,7 +68,8 @@ k_sousedu = 2;
 
 % výpoèet diskriminaèní funkce, zaøazení bodu a vykreslení møížky
 colors = [0 0 1; 0 0.5 0; 1 0 0; 0.75 0 0.75; 0 0.75 0.75; 0.75 0.75 0; 0 0 0];
-figurefigure('Name','4c_k_nejblizsich_sousedu');hold on
+figure('Name','4c_k_nejblizsich_sousedu');
+hold on
 for i = x
     for j = y
         g = zeros(pocet_shluku, pocet_etalonu);

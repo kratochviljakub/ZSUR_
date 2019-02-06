@@ -1,5 +1,5 @@
 % Rozdìlení dat metodou nerovnomìrné binární dìlení do urèeného poètu tøíd
-function [ ] = nerovnomerne_binarni_deleni( data, R )
+function [ a, b, c ] = nerovnomerne_binarni_deleni( data, R )
 % data = mnozina obrazu
 % R = poèet tøíd
 
@@ -64,7 +64,7 @@ d = size(tridy2);
 for i = 1:data_size(1)
     for j = 1:d(2)
         tmp = isnan(tridy2(i,j));
-        if (tridy(i,j) ~= 0) & (tmp == 0)
+        if (tridy2(i,j) ~= 0) & (tmp == 0)
             scatter(data(tridy2(i,j),1), data(tridy2(i,j),2),[], colors(j,:),'x')
             hold on
         end
@@ -81,5 +81,8 @@ end
 title('Nerovnomìrné binární dìlení - rozdìlení dat do shlukù')
 xlabel('x_1')
 ylabel('x_2')
+
+% pøevod tvaru promìnných pro další použití
+[a,b,c] = prevod_tvaru_promennych(data, tridy2, stredy, zkresleni);
 end
 

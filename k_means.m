@@ -22,12 +22,13 @@ while true
     end
 end
 %tmp = [1 2 3 4];
-figure
+figure('Name','start_b_k-means')
 hold on
 for i = 1:R
     mi(i,:) = data(tmp(i),:);
-    scatter(mi(i,1), mi(i,2))
+    scatter(mi(i,1), mi(i,2),'filled')
 end
+title('Poèáteèní body pro k-means')
 
    
 
