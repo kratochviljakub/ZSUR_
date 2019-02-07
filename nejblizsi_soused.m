@@ -6,12 +6,21 @@ function [ ] = nejblizsi_soused( tridy, stredy )
 
 data_size = size(tridy);
 [pocet_shluku,~] = size(stredy); % poèet shlukù
-pocet_etalonu = 10; % poèet etalonù pro každou tøídu
+
+pocet_etalonu = zeros(pocet_shluku,1);
+for i = 1:data_size(1)
+    for j = 1:pocet_shluku
+        if tridy(i,3) == j
+            pocet_etalonu(j) = pocet_etalonu(j) + 1;
+        end
+    end
+end
+
 
 % výbìr etalonù
 etalony = cell(1,pocet_shluku);
-etalony(:) = {zeros(pocet_etalonu,2)};
 for i = 1:pocet_shluku
+    etalony{i} = zeros(pocet_etalonu(i),2);
     counter = 1;
     for j = 1:data_size(1)
         if tridy(j,3) == i
@@ -19,11 +28,9 @@ for i = 1:pocet_shluku
             etalony{i}(counter,2) = tridy(j,2);
             counter = counter + 1;
         end
-        if counter > pocet_etalonu
-            break;
-        end
     end        
 end
+
 
 % møížka bodù
 rastr = 0.5;
@@ -38,14 +45,16 @@ figure('Name','4c_nejblizsi_soused');
 hold on
 for i = x
     for j = y
-        g = zeros(pocet_etalonu*pocet_shluku,1);
+        g = inf(max(pocet_etalonu),4);
         for k = 1:pocet_shluku
-            for m = 1:pocet_etalonu
-                g((k-1)*10+m) = (i - etalony{k}(m,1))^2 + (j - etalony{k}(m,2))^2;
+            counter = 1;
+            for m = 1:pocet_etalonu(k)
+                g(counter,k) = (i - etalony{k}(m,1))^2 + (j - etalony{k}(m,2))^2;
+                counter =  counter + 1;
             end
         end
-        [~,I] = min(g);
-        scatter(i, j,[], colors((fix((I-1)/10)+1),:),'h')
+        [~,I] = min(min(g));
+        scatter(i, j,[], colors(I,:),'h')
     end
 end
 
@@ -72,17 +81,22 @@ figure('Name','4c_k_nejblizsich_sousedu');
 hold on
 for i = x
     for j = y
-        g = zeros(pocet_shluku, pocet_etalonu);
+        g = inf(max(pocet_etalonu),4);
         for k = 1:pocet_shluku
-            for m = 1:pocet_etalonu
-                g(k,m) = (i - etalony{k}(m,1))^2 + (j - etalony{k}(m,2))^2;
+            counter = 1;
+            for m = 1:pocet_etalonu(k)
+                g(counter,k) = (i - etalony{k}(m,1))^2 + (j - etalony{k}(m,2))^2;
+                counter =  counter + 1;
             end
         end
-        g_sorted = sort(g,2);
+        g_sorted = g;
+        for k = 1:pocet_shluku
+            g_sorted(:,k) = sort(g(:,k),1);
+        end
         prumer = zeros(pocet_shluku,1);
         for k = 1:pocet_shluku
             for m = 1:k_sousedu
-                prumer(k) = prumer(k) + g_sorted(k,m);
+                prumer(k) = prumer(k) + g_sorted(m,k);
             end
             prumer(k) = prumer(k) / k_sousedu;
         end
@@ -104,6 +118,11 @@ title('Klasifikátor podle k-nejbližších sousedù')
 xlabel('x_1')
 ylabel('x_2')
 
+lim_x = xlim;
+lim_y = ylim;
+
+txt = strcat('Poèet sousedù: ', num2str(k_sousedu));
+text(lim_x(1), lim_y(1)+2, txt)
 
 end
 

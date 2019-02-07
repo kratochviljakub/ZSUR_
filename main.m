@@ -1,6 +1,6 @@
 tic
 inicializace;
-% 1
+%% 1
 %a)
 tridy(1) = shlukove_hladiny(data);
 % b)
@@ -22,9 +22,9 @@ iterativni_optimalizace(tridy, stredy, J);
 bayes(tridy, stredy);
 % b)
 minimalni_vzdalenost(tridy, stredy);
-% c)
+%% c)
 nejblizsi_soused(tridy, stredy);
-% d)
+%% d)
 rosenblattuv_algoritmus(tridy, stredy);
 konstantni_prirustky(tridy, stredy, 1, 0.2);
 konstantni_prirustky(tridy, stredy, 1, 1);
